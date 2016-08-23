@@ -29,7 +29,7 @@ func main() {
             continue
         }
 
-        log.Printf("<--[%s] %s", update.Message.From.UserName, update.Message.Text)
+        log.Printf("<--[%s] %s, chat_id is %s", update.Message.From.UserName, update.Message.Text, update.Message.Chat.ID)
         if strings.ToLower(update.Message.Text) == "спасибо, мистер дудец" ||
         strings.ToLower(update.Message.Text) == "спасибо мистер дудец"{
           rand.Seed(time.Now().UTC().UnixNano())
@@ -57,7 +57,8 @@ func main() {
               checkErr(err, "Sending failed")
               log.Printf("-->[%s] %s", update.Message.From.UserName, gifs[i]+" " + message.Document.FileID)
           }
-        } else if strings.Contains(strings.ToLower(update.Message.Text), "нахуй") ||
+        } else if (strings.Contains(strings.ToLower(update.Message.Text), "бот") ||
+        strings.Contains(strings.ToLower(update.Message.Text), "дудец"))&& (strings.Contains(strings.ToLower(update.Message.Text), "нахуй") ||
         strings.Contains(strings.ToLower(update.Message.Text), "пизда") ||
         strings.Contains(strings.ToLower(update.Message.Text), "уебывай") ||
         strings.Contains(strings.ToLower(update.Message.Text), "пидор") ||
@@ -65,7 +66,7 @@ func main() {
         strings.Contains(strings.ToLower(update.Message.Text), "хуй") ||
         strings.Contains(strings.ToLower(update.Message.Text), "сосать") ||
         strings.Contains(strings.ToLower(update.Message.Text), "давалка") ||
-        strings.Contains(strings.ToLower(update.Message.Text), "уебок"){
+        strings.Contains(strings.ToLower(update.Message.Text), "уебок")){
           rand.Seed(time.Now().UTC().UnixNano())
           number := rand.Intn(9)
           msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.From.FirstName+negPhrases[number])
