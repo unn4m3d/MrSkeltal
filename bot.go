@@ -31,7 +31,9 @@ func main() {
 
         log.Printf("<--[%s] %s, chat_id is %s", update.Message.From.UserName, update.Message.Text, update.Message.Chat.ID)
         if strings.ToLower(update.Message.Text) == "спасибо, мистер дудец" ||
-        strings.ToLower(update.Message.Text) == "спасибо мистер дудец"{
+        strings.ToLower(update.Message.Text) == "спасибо мистер дудец" ||
+        strings.ToLower(update.Message.Text) == "thank mr skeltal" ||
+        strings.ToLower(update.Message.Text) == "thanks mr skeltal" {
           rand.Seed(time.Now().UTC().UnixNano())
           number := rand.Intn(17)
           log.Printf(strconv.Itoa(number))
