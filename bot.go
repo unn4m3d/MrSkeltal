@@ -7,6 +7,7 @@ import (
     "github.com/go-telegram-bot-api/telegram-bot-api"
     "math/rand"
     "strconv"
+    "regexp"
 )
 
 func main() {
@@ -30,10 +31,8 @@ func main() {
         }
 
         log.Printf("<--[%s] %s, chat_id is %s", update.Message.From.UserName, update.Message.Text, update.Message.Chat.ID)
-        if strings.ToLower(update.Message.Text) == "спасибо, мистер дудец" ||
-        strings.ToLower(update.Message.Text) == "спасибо мистер дудец" ||
-        strings.ToLower(update.Message.Text) == "thank mr skeltal" ||
-        strings.ToLower(update.Message.Text) == "thanks mr skeltal" {
+        if (m,e := regexp.MatchString("^спасибо(,)?\\s*мистер\\s+дудец$",strings.ToLower(update.Message.Text)); m && e != nil) ||
+        (m,e := regexp.MatchString("^спасибо(,)?\\s*мистер\\s+дудец$",strings.ToLower(update.Message.Text)); m && e != nil) {
           rand.Seed(time.Now().UTC().UnixNano())
           number := rand.Intn(17)
           log.Printf(strconv.Itoa(number))
